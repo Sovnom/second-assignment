@@ -1,0 +1,40 @@
+/* css/variables.css */
+:root {
+    /* Colors */
+    --primary-color: #38a169; /* Example green, similar to Tailwind's green-600 */
+    --secondary-color: #f6ad55; /* A light orange/yellow, for potential accents */
+    --text-color-dark: #2d3748; /* Dark gray for headings */
+    --text-color-light: #4a5568; /* Slightly lighter gray for body text */
+    --bg-light-gray: #f7f7f7;
+    --bg-white: #ffffff;
+
+    /* Fonts */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+
+    /* Border Radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-full: 9999px; /* For fully rounded elements like buttons */
+
+    /* Shadow */
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Basic resets */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
