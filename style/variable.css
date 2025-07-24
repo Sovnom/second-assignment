@@ -2,8 +2,8 @@
 :root {
     /* Colors */
     --primary-color: #38a169; /* Example green, similar to Tailwind's green-600 */
-    --secondary-color: #f6ad55; /* A light orange/yellow, for potential accents */
-    --text-color-dark: #2d3748; /* Dark gray for headings */
+    --accent-color: #f97316; /* Tailwind's orange-500 for orange elements */
+    --text-color-dark: #2d3748; /* Dark gray for headings (almost black) */
     --text-color-light: #4a5568; /* Slightly lighter gray for body text */
     --bg-light-gray: #f7f7f7;
     --bg-white: #ffffff;
