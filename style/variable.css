@@ -1,40 +1,832 @@
-/* css/variables.css */
+/* ========================================= */
+/* 1. CSS Variables (from variable.css) */
+/* ========================================= */
 :root {
     /* Colors */
-    --primary-color: #38a169; /* Example green, similar to Tailwind's green-600 */
-    --accent-color: #f97316; /* Tailwind's orange-500 for orange elements */
-    --text-color-dark: #2d3748; /* Dark gray for headings (almost black) */
-    --text-color-light: #4a5568; /* Slightly lighter gray for body text */
-    --bg-light-gray: #f7f7f7;
-    --bg-white: #ffffff;
+    --primary-color: #FF6F61; /* A shade of red/orange for buttons and accents */
+    --secondary-color: #4CAF50; /* A green for secondary buttons if needed (though not heavily used in this design) */
+    --text-color: #333; /* Dark grey for general text */
+    --light-text-color: #666; /* Lighter grey for descriptions */
+    --ash-color: #A9A9A9; /* Ash color for footer text */
+    --heading-color: #222; /* Even darker grey for headings */
+    --background-light: #F8F8F8; /* Light grey background for some sections */
+    --white: #fff; /* Pure white */
+    --dark-grey: #444; /* Dark grey for specific elements like footer background */
+    --border-color: #eee; /* Light grey for borders */
 
     /* Fonts */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Poppins', sans-serif;
+    --font-primary: 'Poppins', sans-serif; /* Recommended Google Font for a modern look */
 
-    /* Spacing */
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
+    /* Spacing (flexible units for responsiveness) */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 40px;
+    --spacing-xl: 80px;
+    --spacing-xl-large: 120px; /* New larger spacing for newsletter */
 
-    /* Border Radius */
-    --border-radius-sm: 0.25rem;
-    --border-radius-md: 0.5rem;
-    --border-radius-lg: 0.75rem;
-    --border-radius-full: 9999px; /* For fully rounded elements like buttons */
-
-    /* Shadow */
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    /* Borders */
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
 }
 
-/* Optional: Basic resets */
-*, *::before, *::after {
+/* ========================================= */
+/* 2. General Body & Reset */
+/* ========================================= */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+/* Specific styling for section titles (h2 with class section-title) */
+.section-title {
+    text-align: center;
+    font-size: 2.5em; /* Default h2 size */
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+}
+.section-title .text-primary {
+    color: var(--primary-color); /* Orange part of the title */
+}
+.section-title .text-black {
+    color: var(--heading-color); /* Black part of the title */
+}
+
+
+/* Specific styling for the H1 in hero-text (ALWAYS FRESH FLOWERS) */
+.hero-main-title {
+    font-size: 3em; /* Larger font size for main heading */
+    font-weight: 700; /* Bold */
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+.hero-main-title .text-black {
+    color: var(--heading-color); /* Ensuring 'ALWAYS' is black/dark grey */
+}
+.hero-main-title .text-primary {
+    color: var(--primary-color); /* Ensuring 'FRESH FLOWERS' is orange */
+}
+
+
+p {
+    margin-bottom: var(--spacing-sm);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    font-size: 1em;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.primary-btn:hover {
+    background-color: #e65c50;
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: var(--dark-grey);
+    color: var(--white);
+}
+
+.secondary-btn:hover {
+    background-color: #222;
+    transform: translateY(-2px);
+}
+
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-xl);
+    color: var(--light-text-color);
+    font-size: 1.1em;
+}
+
+/* ========================================= */
+/* 3. Header Section */
+/* ========================================= */
+.main-header {
+    background-color: var(--white);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.logo img {
+    height: 40px;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.main-nav a {
+    font-weight: 600;
+    color: var(--dark-grey);
+    padding: var(--spacing-xs) 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease-in-out;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.header-icons {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.icon-small {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.icon-small:hover {
+    transform: scale(1.1);
+}
+
+.icon-medium {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.2s ease;
+}
+.icon-medium:hover {
+    transform: scale(1.1);
+}
+
+/* ========================================= */
+/* 4. Hero Section */
+/* ========================================= */
+.hero-section {
+    background-color: var(--background-light);
+    padding: var(--spacing-xl) 0;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    text-align: center; /* Center text on smaller screens */
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 50%;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    margin-bottom: var(--spacing-lg);
+    color: var(--light-text-color);
+}
+
+.hero-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ========================================= */
+/* 5. Our Plants Section */
+/* ========================================= */
+.our-plants-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--white);
+}
+
+.plant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    justify-content: center;
+}
+
+.plant-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--white);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.plant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.plant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.plant-card h3 {
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.3em;
+}
+
+.plant-price-usd {
+    font-size: 1.2em;
+    color: var(--heading-color); /* Changed to black/dark grey */
+    font-weight: 700; /* Made bold */
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
+.add-to-cart-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.9em;
+    width: 100%; /* Make button full width */
+    margin-top: auto;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e65c50;
+}
+
+/* ========================================= */
+/* 6. Flower Lover Section */
+/* ========================================= */
+.flower-lover-section {
+    background-color: var(--background-light);
+    padding: var(--spacing-xl) 0;
+}
+
+.flower-lover-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    text-align: center; /* Center text on smaller screens */
+    flex-direction: row; /* Ensure image is on the left, text on the right for desktop */
+}
+
+.flower-lover-image {
+    flex: 1;
+    position: relative;
+    min-width: 300px;
+    max-width: 60%; /* Increased max-width for larger image */
+    order: 1; /* Image comes first (left) on desktop */
+}
+
+.flower-lover-image img:first-child {
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.trusted-badge {
+    position: absolute;
+    /* Adjusted position for top-right of the image, slightly outside */
+    top: -15%; /* Move it further above the image */
+    right: -15%; /* Move it further outside to the right */
+    width: 280px; /* Increased size for a larger badge */
+    height: 280px; /* Increased size for a larger badge */
+    border-radius: 50%;
+    border: 5px solid var(--white);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    object-fit: contain; /* Ensures the image within the badge fits */
+    background-color: var(--white);
+    padding: 10px;
+    animation: rotate360 10s linear infinite;
+    transform-origin: center center;
+    display: block !important; /* Ensure it's visible by default on larger screens */
+    z-index: 10; /* Ensure badge is on top of other elements if any overlap */
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.flower-lover-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 40%; /* Adjusted max-width for text to accommodate larger image */
+    order: 2; /* Text comes second (right) on desktop */
+}
+
+.flower-lover-text h2 {
+    text-align: left;
+    margin-bottom: var(--spacing-md);
+}
+
+.flower-lover-text p {
+    font-size: 1.1em;
+    margin-bottom: var(--spacing-lg);
+    color: var(--light-text-color);
+}
+
+/* ========================================= */
+/* 7. Latest Deals Section */
+/* ========================================= */
+.latest-deals-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--background-light); /* Changed to light background as per image */
+}
+
+.deal-grid {
+    display: grid;
+    /* Define 2 columns for smaller cards and 1 column for the large card */
+    grid-template-columns: 1fr 1.5fr; /* Left column (smaller items) 1fr, Right column (large item) 1.5fr */
+    grid-template-rows: repeat(2, minmax(180px, 1fr)); /* Two rows, each min 180px (increased), max 1fr */
+    grid-template-areas:
+        "small-top large-card"
+        "small-bottom large-card"; /* Define areas for easier placement */
+    gap: var(--spacing-lg); /* Gap between grid items */
+    align-items: stretch; /* Ensure items stretch to fill cell height */
+}
+
+.deal-card {
+    position: relative;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Stack overlay content */
+    justify-content: center; /* Vertically center overlay content */
+    align-items: center; /* Horizontally center overlay content */
+    text-align: center; /* Center text */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for cards */
+}
+
+.small-deal {
+    height: 100%; /* Make small deals fill their grid row height */
+}
+
+/* Assign grid areas based on HTML structure */
+.deal-grid .deal-card:nth-child(1) { /* Bloom Plant */
+    grid-area: small-top;
+}
+
+.deal-grid .deal-card:nth-child(2) { /* Ana Plant */
+    grid-area: small-bottom;
+}
+
+.deal-grid .large-deal { /* Zabo Plant */
+    grid-area: large-card;   /* Zabo Plant goes to large-card area, which spans two rows */
+    height: 100%; /* Make large deal fill its grid area height */
+}
+
+.deal-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: transform 0.5s ease;
+    filter: brightness(0.7); /* Reduced brightness for better text readability */
+}
+
+.deal-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+}
+
+.deal-overlay {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: var(--spacing-md);
+    color: var(--white);
+    /* Adjusted gradient for central text, covering more area */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+    height: 100%; /* Make overlay cover entire card for central alignment */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 1; /* Ensure overlay is visible */
+}
+
+.deal-overlay h3 {
+    margin-bottom: var(--spacing-xs);
+    color: var(--white);
+    font-size: 1.5em; /* Make deal text larger */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.deal-overlay p {
+    font-size: 1.1em; /* Make shop now text larger */
+    color: #eee;
+    font-weight: 600;
+}
+
+/* ========================================= */
+/* 8. Newsletter Section */
+/* ========================================= */
+.newsletter-section {
+    background-size: cover; /* Ensure background image covers the whole section */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    padding: var(--spacing-xl-large) 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Content inside will be stacked */
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Maintain a good height */
+    color: var(--white); /* Default text color for the section to white */
+    text-align: center; /* Center text within the section */
+}
+
+.newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+    z-index: 0;
+}
+
+.newsletter-content {
+    position: relative;
+    z-index: 1; /* Bring content to front of overlay */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 var(--spacing-md);
+    width: 100%; /* Ensure content takes full width */
+    max-width: 800px; /* Max width for the content area */
+}
+
+.newsletter-content h2 {
+    color: var(--white); /* Heading color to white */
+    margin-bottom: var(--spacing-lg);
+    font-size: 3.5em; /* Make heading significantly larger */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.newsletter-form-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack form and icons */
+    align-items: center; /* Center them horizontally */
+    gap: var(--spacing-lg); /* Space between form and icons */
+    width: 100%; /* Take full width of parent */
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center; /* Center input and button */
+    gap: var(--spacing-sm);
+    flex-wrap: nowrap; /* Keep input and button on one line */
+    width: 100%;
+    max-width: 500px; /* Max width for the form itself */
+}
+
+.newsletter-form input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    border: none; /* No border for the input field */
+    flex-grow: 1;
+    font-size: 1em;
+    outline: none;
+    min-width: 150px;
+}
+
+.subscribe-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    white-space: nowrap;
+}
+
+.subscribe-btn:hover {
+    background-color: #e65c50;
+}
+
+/* ========================================= */
+/* 9. Footer Section */
+/* ========================================= */
+.main-footer {
+    background-color: var(--white); /* Changed to white background */
+    color: var(--ash-color); /* Text color to ash */
+    padding: var(--spacing-xl) 0 var(--spacing-md) 0;
+    font-size: 0.9em; /* Slightly smaller font size for footer text */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    align-items: flex-start;
+}
+
+.footer-about,
+.footer-links,
+.contact-info { /* Apply flex properties to all columns including new contact-info */
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-about {
+    max-width: 350px;
+}
+
+.footer-logo {
+    height: 50px;
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-about p {
+    font-size: 0.9em;
+    color: var(--ash-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-links h3,
+.contact-info h3 { /* Apply consistent heading style */
+    color: var(--text-color); /* Headings darker in ash footer */
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-links ul li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-links a {
+    color: var(--ash-color);
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.contact-info p { /* Styling for contact info text */
+    margin-bottom: var(--spacing-xs);
+    color: var(--ash-color);
+}
+
+/* Style for the social icons specifically within the contact-info */
+.footer-social-icons-right {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md); /* Add some space above icons */
+    justify-content: flex-start; /* Align to the left within contact-info */
+}
+
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color); /* Lighter border for white background */
+    font-size: 0.8em;
+    color: var(--ash-color);
+}
+
+
+/* ========================================= */
+/* 10. Media Queries for Responsiveness */
+/* ========================================= */
+
+/* Tablet and Smaller Desktops (less than 992px) */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 2em;
+    }
+
+    .hero-content,
+    .flower-lover-content {
+        flex-direction: column; /* Stack vertically on smaller screens */
+        text-align: center;
+    }
+
+    .hero-text,
+    .hero-image,
+    .flower-lover-text,
+    .flower-lover-image {
+        max-width: 100%;
+        text-align: center;
+        order: unset; /* Reset order for mobile, default stacking applies */
+    }
+
+    .hero-image,
+    .flower-lover-image {
+        display: flex;
+        justify-content: center;
+    }
+
+    .flower-lover-image img:first-child {
+        max-width: 80%;
+    }
+
+    .trusted-badge {
+        display: none !important; /* Hide the badge on tablets and smaller screens */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    /* Adjust Latest Deals for smaller screens to stack them */
+    .deal-grid {
+        grid-template-columns: 1fr; /* Stack all items in a single column */
+        grid-template-areas: none; /* Reset grid areas for mobile */
+        gap: var(--spacing-lg); /* Keep gap between stacked items */
+    }
+    .deal-card {
+        grid-column: auto; /* Reset column span */
+        grid-row: auto;    /* Reset row span */
+        height: 300px;     /* Give a consistent height when stacked */
+    }
+    .deal-grid .large-deal {
+        height: 300px; /* Ensure large deal also has consistent height when stacked */
+    }
+
+    /* Newsletter adjustments */
+    .newsletter-content h2 {
+        font-size: 2.5em; /* Adjust heading size for tablet */
+    }
+    .newsletter-form-wrapper {
+        gap: var(--spacing-md); /* Reduce gap when stacked */
+    }
+    .newsletter-form {
+        flex-direction: row; /* Keep input and button side-by-side */
+        width: 100%;
+        max-width: 400px; /* Limit width */
+    }
+
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Footer social icons for right side, center them when stacked */
+    .footer-social-icons-right {
+        justify-content: center;
+        margin-left: 0; /* Remove auto margin */
+        width: 100%; /* Take full width */
+    }
+
+    .newsletter-section {
+        padding: var(--spacing-xl) 0; /* Adjust padding for smaller screens */
+        min-height: unset; /* Remove min-height for mobile */
+    }
+}
+
+/* Mobile Devices (less than 600px) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    .section-description {
+        font-size: 1em;
+        margin-bottom: var(--spacing-lg);
+    }
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    .btn {
+        padding: var(--spacing-sm);
+        font-size: 0.9em;
+    }
+
+    .plant-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .plant-card img {
+        height: 150px;
+    }
+
+    .newsletter-form {
+        flex-direction: column; /* Stack input and button on very small screens */
+        width: 90%;
+        margin: 0 auto; /* Center the form */
+    }
+    .newsletter-form input {
+        width: 100%;
+        margin-bottom: var(--spacing-sm);
+    }
+    .newsletter-form .subscribe-btn {
+        width: 100%; /* Make button full width when stacked */
+    }
+}
+
+/* Very Small Mobile Devices (less than 400px) */
+@media (max-width: 400px) {
+    .header-icons {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    .main-nav ul {
+        gap: var(--spacing-xs);
+    }
 }
